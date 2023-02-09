@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./main.css">
+</head>
+<body>
+    <div class="main">
+        <form action="" method="post" class="form-1" id="form-1">
+            <div class="form-header">
+                <h3 class="form-title">Chào mừng đến với Test</h3>
+                <p class="form-wellcome">Cùng nhau học tập miễn phí tại Test</p>
+            </div>
+           
+            <div class="form-group">
+                <label for="fullname" class="form-label">Tên đầy đủ</label>
+                <input type="text" name="fullname" class="form-controll" id="fullname" placeholder="Vd: Phạm Đỗ Việt Dũng">
+                <span id="form-msg" class="form-msg"></span>
+            </div>
+            <div class="form-group">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" name="email" class="form-controll" id="email" placeholder="Vd: phamdvdung@gmail.com">
+                <span id="form-msg" class="form-msg"></span>
+            </div>
+            <div class="form-group">
+                <label for="password" class="form-label">Password</label>
+                <input type="text" name="password" class="form-controll" id="password" placeholder="Nhập mật khẩu">
+                <span id="form-msg" class="form-msg"></span>
+            </div>
+            <div class="form-group">
+                <label for="password-again" class="form-label">Nhập lại password</label>
+                <input type="text" name="password-again" class="form-controll" id="password-again" placeholder="Nhập lại mật khẩu">
+                <span id="form-msg" class="form-msg"></span>
+            </div>
+          
+            <button class="submit">Đăng ký</button>
+        </form>
+    </div>
+    <script src="./main.js"></script>
+    <script>
+        Validator({
+            form: '#form-1',
+            msgSelector: '#form-msg',
+            rules: [
+                Validator.isRequired('#fullname', 'Vui lòng nhập trường này'),
+                Validator.isRequired('#email', 'Vui lòng nhập trường này'),
+                Validator.isRequired('#password', 'Vui lòng nhập trường này'),
+                Validator.isRequired('#password-again', 'Vui lòng nhập trường này'),
+                Validator.isEmail('#email'),
+                Validator.minLength('#password', 8),
+                Validator.isConfirmed('#password-again', function() {
+                    return document.querySelector('#password').value
+                })
+            ],
+            onSubmit: function(data) {
+                console.log(data)
+            }
+        });
+    </script>
+</body>
+</html>
